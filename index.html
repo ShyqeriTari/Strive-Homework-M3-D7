@@ -26,7 +26,10 @@
 
       <input class=" mx-3" type="text" placeholder="Write something">
 
-      <button onclick="displayOnlyNames(), displayAddress()" style="box-shadow: 5px 5px 5px 5px red; color: white; background-color: coral; border: 1px solid black;">Display Names</button>
+      <button onclick="displayOnlyNames(), displayAddress()" style="box-shadow: 5px 5px 5px 5px blue; color: white; background-color: coral; border: 1px solid black;">Display Names</button>
+      <button onclick="sortNames()" type="button" class="btn btn-primary mx-5" data-bs-toggle="button" autocomplete="off" style="box-shadow: 5px 5px 5px 5px green; color: white; background-color: grey; border: 1px solid black;">Sort order</button>
+
+   
     </div>  
 
     <table class="table mb-3">
@@ -199,6 +202,39 @@ try { const collectData4 = await fetch("https://jsonplaceholder.typicode.com/use
  }
 
 }
+
+let arr1 = []
+sortNames = async () => {
+
+try { const collectData5 = await fetch("https://jsonplaceholder.typicode.com/users")
+ const dataResponse5 = await collectData5.json()
+
+ let table = document.querySelector(".table-body")
+ table.innerHTML = " "
+
+ for(let i = 0; i < dataResponse5.length; i++) {
+   arr1.push( dataResponse5[i].name.split(" ")[0])
+   
+ }
+ console.log(arr1.sort())
+
+ let namesSort = arr1.sort()
+
+ for(let j = 0; j < namesSort.length; j++) {
+     table.innerHTML += `  
+
+<div class="d-block mb-3">  ${namesSort[j]}</div>
+
+`
+ }
+}
+ catch(err) {
+     console.log(err)
+ }
+
+}
+
+
 
 
 
